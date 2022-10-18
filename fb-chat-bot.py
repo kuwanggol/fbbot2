@@ -36,6 +36,7 @@ class ChatBot(Client):
 
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         try:
             msg = str(message_object).split(",")[15][14:-1]
 
@@ -52,7 +53,6 @@ class ChatBot(Client):
                 pass
         def sendMsg():
             global msgids
-            mikeystatus()
             if (author_id != self.uid):
                 msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))

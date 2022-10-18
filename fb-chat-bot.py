@@ -36,7 +36,6 @@ class ChatBot(Client):
 
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        mikeystatus()
         try:
             msg = str(message_object).split(",")[15][14:-1]
 
@@ -52,12 +51,14 @@ class ChatBot(Client):
             except:
                 pass
         def sendMsg():
+            mikeystatus()
             global msgids
             if (author_id != self.uid):
                 msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
         
         def reactMsg(react):
+            mikeystatus()
             if (author_id != self.uid):
                 if react == "SMILE":
                     self.reactToMessage(message_object.uid, MessageReaction.SMILE)
@@ -76,6 +77,7 @@ class ChatBot(Client):
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
         def fetchThreadsMsg():
+            mikeystatus()
             thread_idd = []
             arrayn = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
             for num in range(1,len(arrayn.split("uid='"))):
@@ -92,6 +94,7 @@ class ChatBot(Client):
                 pass
 
         def repeatSend():
+            mikeystatus()
             thread_idd = list(fetchThreadsMsg())
             timezoneDefault = pytz.timezone("Asia/Manila") 
             timeInPH = datetime.now(timezoneDefault)
@@ -116,6 +119,7 @@ class ChatBot(Client):
 
 
         def sendQuery():
+            mikeystatus()
             global msgids
             msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                       thread_type=thread_type))
@@ -144,12 +148,14 @@ class ChatBot(Client):
                 pass
 
         def conSTR(subject,query):
+            mikeystatus()
             indx = msg.index(query)
             lengh = len(query)
             print(indx)
             query = msg[indx+lengh:]
             return(query)
         def texttospeech(mytext):
+            mikeystatus()
             global msgids
             language = 'tl'
             myobj = gTTS(text=mytext, lang=language, slow=False)
@@ -161,6 +167,7 @@ class ChatBot(Client):
             msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
 
         def uploadImg(imagePath):
+            mikeystatus()
             global msgids
             with open(imagePath, "rb") as file:
                 url = "https://api.imgbb.com/1/upload"
@@ -173,6 +180,7 @@ class ChatBot(Client):
                 sendMsg()
 
         def removebg(imagePath):
+            mikeystatus()
             global msgids
             response = requests.post(
             'https://api.remove.bg/v1.0/removebg',
@@ -195,6 +203,7 @@ class ChatBot(Client):
                 print("Error:", response.status_code, response.text)
 
         def weather(city):
+            mikeystatus()
             api_address = "https://api.openweathermap.org/data/2.5/weather?appid=0c42f7f6b53b244c78a418f4f181282a&q="
             url = api_address + city
             json_data = requests.get(url).json()
@@ -213,6 +222,7 @@ class ChatBot(Client):
                 f"The current temperature of {city} is %.1f degree celcius with {description}" % celcius_res)
 
         def stepWiseCalculus(query):
+            mikeystatus()
             global msgids
             query = query.replace("+", "%2B")
             try:
@@ -262,6 +272,7 @@ class ChatBot(Client):
                 pass
 
         def stepWiseAlgebra(query):
+            mikeystatus()
             global msgids
             query = query.replace("+", "%2B")
             api_address = f"http://api.wolframalpha.com/v2/query?appid=Y98QH3-24PWX83VGA&input=solve%203x^2+4x-6=0&podstate=Result__Step-by-step+solution&format=plaintext&output=json"
@@ -314,6 +325,7 @@ class ChatBot(Client):
 
         
         def stepWiseQueries(query):
+            mikeystatus()
             global msgids
             query = query.replace("+", "%2B")
             api_address = f"http://api.wolframalpha.com/v2/query?appid=Y98QH3-24PWX83VGA&input={query}&podstate=Result__Step-by-step+solution&format=plaintext&output=json"
@@ -351,6 +363,7 @@ class ChatBot(Client):
 
         try:
             def searchForUsers(self, name=msg, limit=10):
+                mikeystatus()
                 global msgids
                 try:
                     limit = int(msg.split()[4])
@@ -370,6 +383,7 @@ class ChatBot(Client):
             pass
 
         def programming_solution(self, query):
+            mikeystatus()
             global msgids
             try:
                 count = int(msg.split()[-1])
@@ -401,6 +415,7 @@ class ChatBot(Client):
                 print("appended..")
 
             def multiThreadImg(img_url):
+                mikeystatus()
                 if(thread_type == ThreadType.USER):
                     msgids.append(self.sendRemoteFiles(
                         file_urls=img_url, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
@@ -412,6 +427,7 @@ class ChatBot(Client):
                 executor.map(multiThreadImg, image_urls)
 
         def translator(self, query, target):
+            mikeystatus()
             query = " ".join(query.split()[1:-2])
             url = "https://microsoft-translator-text.p.rapidapi.com/translate"
 
@@ -434,6 +450,7 @@ class ChatBot(Client):
             return json_response[0]["translations"][0]["text"]
 
         def imageSearch(self, msg):
+            mikeystatus()
             try:
                 count = int(msg.split()[-1])
             except:
@@ -467,6 +484,7 @@ class ChatBot(Client):
                 print("appended..")
 
             def multiThreadImg(img_url):
+                mikeystatus()
                 global msgids
                 if(thread_type == ThreadType.USER):
                     msgids.append(self.sendRemoteFiles(

@@ -35,10 +35,10 @@ class ChatBot(Client):
 
     if(msgstatus == "OFF"):
         if (author_id in masterid):
-
+            pass
         else:
             raiseException()
-            
+
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
             msg = str(message_object).split(",")[15][14:-1]

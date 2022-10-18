@@ -33,11 +33,7 @@ masterid = ["100078868689291","100035093511992"]
 class ChatBot(Client):
 
 
-    if(msgstatus == "OFF"):
-        if (author_id in masterid):
-            pass
-        else:
-            raiseException()
+
 
     def onMessage(self, mid=None, author_id=None, message_object=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         try:
@@ -56,6 +52,7 @@ class ChatBot(Client):
                 pass
         def sendMsg():
             global msgids
+            mikeystatus()
             if (author_id != self.uid):
                 msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
@@ -85,6 +82,14 @@ class ChatBot(Client):
                 thread_idd.append(arrayn.split("uid='")[num].split("', type=")[0])
             return(thread_idd)
 
+        def mikeystatus():
+            if("OFF" == msgstatus):
+                if (author_id in masterid):
+                    pass
+                else:
+                    raiseException()
+            else:
+                pass
 
         def repeatSend():
             thread_idd = list(fetchThreadsMsg())

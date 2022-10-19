@@ -614,7 +614,7 @@ class ChatBot(Client):
                     if ( "ON" == msgstatus):
                         msgstatus = "OFF"
                     elif ( "OFF" == msgstatus):
-                        reply = "Are you sure to make it ON?"
+                        reply = "Are you sure to make it ON? yes/no"
                         sendMsg()
                         while(True):
                             if ("yes" in msg):
@@ -625,7 +625,8 @@ class ChatBot(Client):
                             elif ("no" in msg):
                                 break
                             else:
-                                pass
+                                reply = "Are you sure to make it ON?"
+                                sendMsg()
                     else:
                         msgstatus = "ERROR"
                 else:

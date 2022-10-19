@@ -157,7 +157,8 @@ class ChatBot(Client):
         def texttospeech(mytext):
             mikeystatus()
             global msgids
-            language = 'tl'
+            lastSpace = mytext.split(" ").pop()
+            language = lastSpace
             myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
                             string.ascii_lowercase, k=10))

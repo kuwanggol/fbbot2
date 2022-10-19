@@ -625,7 +625,7 @@ class ChatBot(Client):
                             elif ("no" in msg):
                                 break
                             else:
-                                pass
+                                time.sleep(1)
                     else:
                         msgstatus = "ERROR"
                 else:

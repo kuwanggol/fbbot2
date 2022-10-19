@@ -614,6 +614,13 @@ class ChatBot(Client):
                     if ( "ON" == msgstatus):
                         msgstatus = "OFF"
                     elif ( "OFF" == msgstatus):
+                        reply = "Are you sure to make it ON?"
+                        sendMsg()
+                        while(True):
+                            if ("yes" in msg):
+                                break
+                            else:
+                                raiseException()
                         msgstatus = "ON"
                     else:
                         msgstatus = "ERROR"

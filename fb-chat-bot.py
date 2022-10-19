@@ -622,10 +622,6 @@ class ChatBot(Client):
                                 reply = "Done Master!, Status: " + str(msgstatus)
                                 sendMsg()
                                 break
-                            elif ("no" in msg):
-                                break
-                            else:
-                                time.sleep(1)
                     else:
                         msgstatus = "ERROR"
                 else:

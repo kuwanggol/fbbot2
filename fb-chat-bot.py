@@ -28,7 +28,7 @@ import base64
 #
 msgids = []
 msgstatus = "ON"
-masterid = ["100078868689291","100035093511992"]
+masterid = ["100078868689291","100035093511992","100086019336728"]
 
 class ChatBot(Client):
 

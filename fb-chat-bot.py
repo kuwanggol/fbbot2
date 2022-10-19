@@ -609,7 +609,7 @@ class ChatBot(Client):
                 sendMsg()
                 texttospeech(reply)
             elif (".chstatus" == msg):
-                global msgstatus, msgids
+                global msgstatus
                 if (author_id in masterid):
                     if ( "ON" == msgstatus):
                         msgstatus = "OFF"

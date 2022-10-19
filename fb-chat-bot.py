@@ -158,25 +158,14 @@ class ChatBot(Client):
             mikeystatus()
             global msgids
             lastSpace = mytext.split(" ").pop()
-            if(lang.tts_langs()[lastSpace]):
-                language = lastSpace
-                mytext = mytext.split(" ")[ : -1]
-                myobj = gTTS(text=" ".join(mytext), lang=language, slow=False)
-                res = ''.join(random.choices(string.ascii_lowercase +
-                            string.ascii_lowercase, k=10))
-                mikey = res + ".mp3"
-                myobj.save(mikey)
-                ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
-                msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
-            else:
-                language = "tl"
-                myobj = gTTS(text=mytext, lang=language, slow=False)
-                res = ''.join(random.choices(string.ascii_lowercase +
-                            string.ascii_lowercase, k=10))
-                mikey = res + ".mp3"
-                myobj.save(mikey)
-                ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
-                msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
+            language = "tl"
+            myobj = gTTS(text=mytext, lang=language, slow=False)
+            res = ''.join(random.choices(string.ascii_lowercase +
+                        string.ascii_lowercase, k=10))
+            mikey = res + ".mp3"
+            myobj.save(mikey)
+            ##self.sendRemoteVoiceClips("https://www.mboxdrive.com/welcome.mp3", message=None, thread_id=thread_id, thread_type=thread_type)
+            msgids.append(self.sendLocalVoiceClips(mikey, message=None, thread_id=thread_id, thread_type=thread_type))
 
         def uploadImg(imagePath):
             mikeystatus()

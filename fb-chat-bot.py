@@ -625,8 +625,7 @@ class ChatBot(Client):
                             elif ("no" in msg):
                                 break
                             else:
-                                reply = "Are you sure to make it ON?"
-                                sendMsg()
+                                pass
                     else:
                         msgstatus = "ERROR"
                 else:

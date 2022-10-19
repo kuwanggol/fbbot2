@@ -618,14 +618,16 @@ class ChatBot(Client):
                         sendMsg()
                         while(True):
                             if ("yes" in msg):
+                                msgstatus = "ON"
+                                reply = "Done Master!, Status: " + str(msgstatus)
+                                sendMsg()
+                                break
+                            elif ("no" in msg):
                                 break
                             else:
-                                raiseException()
-                        msgstatus = "ON"
+                                pass
                     else:
                         msgstatus = "ERROR"
-                    reply = "Done Master!, Status: " + str(msgstatus)
-                    sendMsg()
                 else:
                     reply = "You're not my master 😒"
                     sendMsg()

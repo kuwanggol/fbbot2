@@ -158,7 +158,13 @@ class ChatBot(Client):
             mikeystatus()
             global msgids
             lastSpace = mytext.split(" ").pop()
-            language = lastSpace
+            try:
+                mytext = mytext.split(" ")[ : -1]
+                language = lastSpace
+                myobj = gTTS(text=" ".join(mytext), lang=language, slow=False)
+            except:
+                pass
+            language = "tl"
             myobj = gTTS(text=mytext, lang=language, slow=False)
             res = ''.join(random.choices(string.ascii_lowercase +
                             string.ascii_lowercase, k=10))

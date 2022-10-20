@@ -645,7 +645,7 @@ class ChatBot(Client):
 
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
         global msgids
-        if(author_id == self.uid and author_id in masterid and author_id in otherbotid):
+        if(author_id == self.uid or author_id in masterid or author_id in otherbotid):
             pass
         else:
             try:

@@ -577,7 +577,7 @@ class ChatBot(Client):
                 reply = "Good Morning🌅🌺"
                 sendMsg()
                 texttospeech(reply)
-            elif ("goodnight" in msg or "good night" in msg or "gn" in msg):
+            elif ("goodnight" in msg or "good night" in msg):
                 reply = "Good night🌃🌙"
                 sendMsg()
                 texttospeech(reply)

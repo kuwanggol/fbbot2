@@ -59,6 +59,11 @@ class ChatBot(Client):
                           thread_type=thread_type))
         
         def googlesearch(ToBeSearch,quant):
+            try:
+                quant = int(quant.split(" ").pop())
+                ToBeSearch = ToBeSearch.replace(str(quant),"")
+            except:
+                quant = str(quant.split(" ").pop())
             url = "https://google.serper.dev/search"
             payload = json.dumps({
               "q": ToBeSearch,
@@ -72,11 +77,6 @@ class ChatBot(Client):
             }
             respGoogle = requests.post(url, headers=headers, data=payload)
             mikey = respGoogle.json()
-            try:
-                quant = int(quant.split(" ").pop())
-                ToBeSearch = ToBeSearch.replace(str(quant),"")
-            except:
-                quant = str(quant.split(" ").pop())
             if (type(quant) != int):
                 for num in range(len(mikey["organic"])):
                     try:

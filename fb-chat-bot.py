@@ -72,6 +72,10 @@ class ChatBot(Client):
             }
             respGoogle = requests.post(url, headers=headers, data=payload)
             mikey = respGoogle.json()
+            try:
+                quant = int(quant.split(" ").pop())
+            except:
+                quant = str(quant.split(" ").pop())
             quant = quant.split(" ").pop()
             if (type(quant) != int):
                 for num in range(len(mikey["organic"])):
@@ -84,11 +88,12 @@ class ChatBot(Client):
                     except:
                         pass
             else:
+                for 
                 try:
-                    reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
+                    reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"]
                     sendMsg()
-                    for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
-                        reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
+                    for numlinks in range(len(mikey["organic"][quant]["sitelinks"])):
+                        reply = "Maybe can help you: " + mikey["organic"][quant]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][quant]["sitelinks"][numlinks]["link"]
                         sendMsg()
                 except:
                     pass

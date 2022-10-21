@@ -93,7 +93,6 @@ class ChatBot(Client):
                 except:
                     pass
 
-print(response.text)
         def reactMsg(react):
             mikeystatus()
             if (author_id != self.uid):

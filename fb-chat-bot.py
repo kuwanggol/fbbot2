@@ -81,6 +81,8 @@ class ChatBot(Client):
                 for num in range(len(mikey["organic"])):
                     try:
                         reply = "Title: " + mikey["organic"][num]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
+                        print(reply)
+                        sys.stdout.flush()
                         sendMsg()
                         for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
                             reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
@@ -90,6 +92,8 @@ class ChatBot(Client):
             else:
                 try:
                     reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"]
+                    print(reply)
+                    sys.stdout.flush()
                     sendMsg()
                     for numlinks in range(len(mikey["organic"][quant]["sitelinks"])):
                         reply = "Maybe can help you: " + mikey["organic"][quant]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][quant]["sitelinks"][numlinks]["link"]

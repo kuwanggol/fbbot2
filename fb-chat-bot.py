@@ -81,20 +81,30 @@ class ChatBot(Client):
                     try:
                         reply = "Title: " + mikey["organic"][num]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
                         print(reply)
-                        sendMsg()
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
                         for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
                             reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
-                            sendMsg()
+                            print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
                     except:
                         pass
             else:
                 try:
                     reply = str("Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"])
                     print(reply)
-                    sendMsg()
+                    if (author_id != self.uid):
+                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
                     for numlinks in range(len(mikey["organic"][quant]["sitelinks"])):
                         reply = "Maybe can help you: " + mikey["organic"][quant]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][quant]["sitelinks"][numlinks]["link"]
-                        sendMsg()
+                        print(reply)
+                    if (author_id != self.uid):
+                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                          thread_type=thread_type))
                 except:
                     pass
 

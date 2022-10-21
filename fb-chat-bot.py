@@ -87,10 +87,7 @@ class ChatBot(Client):
 
         def mikeystatus():
             if("OFF" == msgstatus):
-                if (author_id in masterid):
-                    pass
-                else:
-                    raiseException()
+                raiseException()
             else:
                 pass
 

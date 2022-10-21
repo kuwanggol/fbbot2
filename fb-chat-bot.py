@@ -79,7 +79,7 @@ class ChatBot(Client):
             if (type(quant) != int):
                 for num in range(len(mikey["organic"])):
                     try:
-                        reply = "Title: " + mikey["organic"][num]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
+                        reply = "Title: " + mikey["organic"][num]["title"] + "\n\n" + "Discription: " + mikey["organic"][num]["snippet"] + "\n\n" + "Source: " + mikey["organic"][num]["link"]
                         print(reply)
                         if (author_id != self.uid):
                             msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
@@ -94,7 +94,7 @@ class ChatBot(Client):
                         pass
             else:
                 try:
-                    reply = str("Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"])
+                    reply = str("Title: " + mikey["organic"][quant]["title"] + "\n\n" + "Discription: " + mikey["organic"][quant]["snippet"] + "\n\n" + "Source: " + mikey["organic"][quant]["link"])
                     print(reply)
                     if (author_id != self.uid):
                         msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,

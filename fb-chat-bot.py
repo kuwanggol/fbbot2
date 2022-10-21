@@ -89,9 +89,7 @@ class ChatBot(Client):
                         pass
             else:
                 try:
-                    reply = "Hi"
-                    sendMsg()
-                    reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"]
+                    reply = str("Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"])
                     print(reply)
                     sendMsg()
                     for numlinks in range(len(mikey["organic"][quant]["sitelinks"])):

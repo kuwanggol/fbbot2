@@ -58,6 +58,42 @@ class ChatBot(Client):
                 msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                           thread_type=thread_type))
         
+        def googlesearch(ToBeSearch,quant):
+            url = "https://google.serper.dev/search"
+            payload = json.dumps({
+              "q": ToBeSearch,
+              "gl": "us",
+              "hl": "en",
+              "autocorrect": "True"
+            })
+            headers = {
+              'X-API-KEY': '835838808dd8d8c1e032da2a3169322626130910',
+              'Content-Type': 'application/json'
+            }
+            respGoogle = requests.post(url, headers=headers, data=payload)
+            mikey = respGoogle.json()
+            quant = quant.split(" ").pop()
+            if (type(quant) != int):
+                for num in range(len(mikey["organic"])):
+                    try:
+                        reply = "Title: " + mikey["organic"][num]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
+                        sendMsg()
+                        for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
+                            reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
+                            sendMsg()
+                    except:
+                        pass
+            else:
+                try:
+                    reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][num]["link"] + "\n" + "Discription: " + mikey["organic"][num]["snippet"]
+                    sendMsg()
+                    for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
+                        reply = "Maybe can help you: " + mikey["organic"][num]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][num]["sitelinks"][numlinks]["link"]
+                        sendMsg()
+                except:
+                    pass
+
+print(response.text)
         def reactMsg(react):
             mikeystatus()
             if (author_id != self.uid):
@@ -603,6 +639,9 @@ class ChatBot(Client):
                 reply = "Pake mo ba? 😒😒"
                 sendMsg()
                 texttospeech(reply)
+            elif (".gsearch" in msg):
+                mytext = conSTR(msg,".gsearch")
+                googlesearch(mytext,mytext)
             elif (".chstatus" == msg):
                 global msgstatus
                 if (author_id in masterid):

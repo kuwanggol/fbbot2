@@ -76,7 +76,6 @@ class ChatBot(Client):
                 quant = int(quant.split(" ").pop())
             except:
                 quant = str(quant.split(" ").pop())
-            quant = quant.split(" ").pop()
             if (type(quant) != int):
                 for num in range(len(mikey["organic"])):
                     try:

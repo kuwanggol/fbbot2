@@ -88,7 +88,6 @@ class ChatBot(Client):
                     except:
                         pass
             else:
-                for 
                 try:
                     reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"]
                     sendMsg()

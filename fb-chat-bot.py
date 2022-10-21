@@ -602,7 +602,7 @@ class ChatBot(Client):
                 msg = conSTR(msg,".changenn")
                 self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
             elif (".help" in msg):
-                reply = ".image - search image online.\n.weather - {county/city}\n.say - convert text to speech.\n.solve - basic math calculation.\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
+                reply = ".gsearch - Google Search ex:{.gsearch what is bot 1}\n.image - search image online ex:{.image bot}\n.weather - {county/city}\n.say - convert text to speech ex:{.say bot}.\n.solve - basic math calculation.\n.mute - mute conversation\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
                 for val in msgids:

@@ -74,7 +74,7 @@ class ChatBot(Client):
             mikey = respGoogle.json()
             try:
                 quant = int(quant.split(" ").pop())
-                ToBeSearch = ToBeSearch.replace(quant,"")
+                ToBeSearch = ToBeSearch.replace(str(quant),"")
             except:
                 quant = str(quant.split(" ").pop())
             if (type(quant) != int):

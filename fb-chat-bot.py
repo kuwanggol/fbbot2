@@ -90,7 +90,7 @@ class ChatBot(Client):
             else:
                 try:
                     reply = "Hi"
-                    sendMsg
+                    sendMsg()
                     reply = "Title: " + mikey["organic"][quant]["title"] + "\n" + "Source: " + mikey["organic"][quant]["link"] + "\n" + "Discription: " + mikey["organic"][quant]["snippet"]
                     print(reply)
                     sendMsg()

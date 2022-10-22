@@ -95,8 +95,8 @@ class ChatBot(Client):
                     except:
                         pass
             else:
-                try:
-                    for num in range(quant):
+                for num in range(quant):
+                    try:
                         reply = str("Title: " + mikey["organic"][num]["title"] + "\n\n" + "Discription: " + mikey["organic"][num]["snippet"] + "\n\n" + "Source: " + mikey["organic"][num]["link"])
                         print(reply)
                         if (author_id != self.uid):
@@ -108,8 +108,9 @@ class ChatBot(Client):
                         if (author_id != self.uid):
                             msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                               thread_type=thread_type))
-                except:
-                    pass
+                    except:
+                        pass
+                
 
         def reactMsg(react):
             mikeystatus()

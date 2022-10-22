@@ -518,7 +518,7 @@ class ChatBot(Client):
                   'Content-Type': 'application/json'
                     }
 
-            mikeyImage = requests.post(url, headers=headers, data=payload)
+            mikeyImage = requests.post(url, headers=headers, data=payload).json()
             if (type(quant) != int):
                 for num in range(len(mikeyImage["images"])):
                     print(mikeyImage["images"][num]["imageUrl"])

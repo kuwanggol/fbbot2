@@ -95,17 +95,18 @@ class ChatBot(Client):
                         pass
             else:
                 try:
-                    reply = str("Title: " + mikey["organic"][quant]["title"] + "\n\n" + "Discription: " + mikey["organic"][quant]["snippet"] + "\n\n" + "Source: " + mikey["organic"][quant]["link"])
-                    print(reply)
-                    if (author_id != self.uid):
-                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
-                          thread_type=thread_type))
-                    for numlinks in range(len(mikey["organic"][quant]["sitelinks"])):
-                        reply = "Maybe can help you: " + mikey["organic"][quant]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][quant]["sitelinks"][numlinks]["link"]
+                    for num in range(quant):
+                        reply = str("Title: " + mikey["organic"][num]["title"] + "\n\n" + "Discription: " + mikey["organic"][num]["snippet"] + "\n\n" + "Source: " + mikey["organic"][num]["link"])
                         print(reply)
-                    if (author_id != self.uid):
-                        msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
-                          thread_type=thread_type))
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                              thread_type=thread_type))
+                        for numlinks in range(len(mikey["organic"][num]["sitelinks"])):
+                            reply = "Maybe can help you: " + mikey["organic"][quant]["sitelinks"][numlinks]["title"] + " Link: " + mikey["organic"][quant]["sitelinks"][numlinks]["link"]
+                            print(reply)
+                        if (author_id != self.uid):
+                            msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                              thread_type=thread_type))
                 except:
                     pass
 
@@ -523,7 +524,11 @@ class ChatBot(Client):
                 for num in range(len(mikeyImage["images"])):
                     print(mikeyImage["images"][num]["imageUrl"])
             else:
-                print(mikeyImage["images"][quant]["imageUrl"])
+                try:
+                    for num in range(quant):
+                        print(mikeyImage["images"][num]["imageUrl"])
+                except IndexError:
+                    print("Error")
 
         def imageSearch(self, msg):
             mikeystatus()

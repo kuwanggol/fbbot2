@@ -509,11 +509,10 @@ class ChatBot(Client):
 
             translator = googletrans.Translator()
             language = googletrans.LANGUAGES
-            
             if (destinion in language):
                 Translated = translator.translate(ToBeTranslate, dest=destinion).text
                 print(language)
-                reply = Translated
+                reply = Translated.replace(destinion,"")
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))

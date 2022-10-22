@@ -17,6 +17,7 @@ import random, string
 from datetime import datetime
 import pytz
 import base64
+import googletrans
 
 # message_object.author for profileid
 # message_object.uid for chatid
@@ -499,6 +500,29 @@ class ChatBot(Client):
 
             return json_response[0]["translations"][0]["text"]
 
+        def gtranslator(ToBeTranslate):
+            try:
+                destinion = int(ToBeTranslate.split(" ").pop())
+                ToBeTranslate = ToBeTranslate.replace(str(destinion),"")
+            except:
+                destinion = str(ToBeTranslate.split(" ").pop())
+
+            translator = googletrans.Translator()
+            language = googletrans.LANGUAGES
+            
+            if (destinion in language):
+                Translated = translator.translate(ToBeTranslate, dest=destinion).text
+                print(language)
+                reply = Translated
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
+            else:
+                reply = "Wrong Translation Code used!"
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
+
         def gimageSearch(ToBeSearchImage):
             try:
                 quant = int(ToBeSearchImage.split(" ").pop())
@@ -635,7 +659,9 @@ class ChatBot(Client):
             elif (".say" in msg):
                 mytext = conSTR(msg,".say")
                 texttospeech(mytext)
-
+            elif(".gtranslate" in msg):
+                mytext = conSTR(msg,".gtranslate")
+                gtranslator(mytext)
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)

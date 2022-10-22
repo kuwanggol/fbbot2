@@ -310,7 +310,6 @@ class ChatBot(Client):
                         answer = answer.replace("sqrt", "√")
 
                         if(thread_type == ThreadType.USER):
-                            f
                             self.sendRemoteFiles(
                                 file_urls=answer, message=None, thread_id=thread_id, thread_type=ThreadType.USER)
                         elif(thread_type == ThreadType.GROUP):
@@ -522,11 +521,23 @@ class ChatBot(Client):
             mikeyImage = requests.post(url, headers=headers, data=payload).json()
             if (type(quant) != int):
                 for num in range(len(mikeyImage["images"])):
-                    print(mikeyImage["images"][num]["imageUrl"])
+                    result = mikeyImage["images"][num]["imageUrl"]
+                    if(thread_type == ThreadType.USER):
+                        msgids.append(self.sendRemoteFiles(
+                            file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                    elif(thread_type == ThreadType.GROUP):
+                        msgids.append(self.sendRemoteFiles(
+                            file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
             else:
                 try:
                     for num in range(quant):
-                        print(mikeyImage["images"][num]["imageUrl"])
+                        result = mikeyImage["images"][num]["imageUrl"]
+                        if(thread_type == ThreadType.USER):
+                            msgids.append(self.sendRemoteFiles(
+                                file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.USER))
+                        elif(thread_type == ThreadType.GROUP):
+                            msgids.append(self.sendRemoteFiles(
+                                file_urls=result, message=None, thread_id=thread_id, thread_type=ThreadType.GROUP))
                 except IndexError:
                     print("Error")
 

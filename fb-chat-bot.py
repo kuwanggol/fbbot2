@@ -511,13 +511,17 @@ class ChatBot(Client):
             language = googletrans.LANGUAGES
             if (destinion in language):
                 Translated = translator.translate(ToBeTranslate, dest=destinion).text
-                print(language)
                 reply = Translated.replace(destinion,"")
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
+            elif ("languages" == destinion):
+                reply = language
+                if (author_id != self.uid):
+                    msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
+                    thread_type=thread_type))
             else:
-                reply = "Wrong Translation Code used!"
+                reply = "Wrong Translation Code used!\n chat .translate languages"
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))

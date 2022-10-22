@@ -600,7 +600,8 @@ class ChatBot(Client):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
             elif(".gimage" in msg):
-                gimageSearch(msg)
+                mytext = conSTR(msg,".gimage")
+                gimageSearch(mytext)
             elif(".progsol" in msg):
                 programming_solution(self, msg)
             elif(".translate" in msg):

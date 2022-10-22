@@ -499,6 +499,33 @@ class ChatBot(Client):
 
             return json_response[0]["translations"][0]["text"]
 
+        def gimageSearch(ToBeSearchImage):
+            try:
+                quant = int(ToBeSearchImage.split(" ").pop())
+                ToBeSearchImage = ToBeSearchImage.replace(str(quant),"")
+            except:
+                quant = str(ToBeSearchImage.split(" ").pop())
+            url = "https://google.serper.dev/images"
+
+            payload = json.dumps({
+                  "q": ToBeSearchImage,
+                  "gl": "us",
+                  "hl": "en",
+                  "autocorrect": False
+                    })
+            headers = {
+                  'X-API-KEY': '835838808dd8d8c1e032da2a3169322626130910',
+                  'Content-Type': 'application/json'
+                    }
+
+            response = requests.request("POST", url, headers=headers, data=payload)
+            mikeyImage = response
+            if (type(quant) != int):
+                for num in range(len(mikeyImage["images"])):
+                    print(mikeyImage["images"][num]["imageUrl"])
+            else:
+                print(mikeyImage["images"][quant]["imageUrl"])
+
         def imageSearch(self, msg):
             mikeystatus()
             try:
@@ -557,7 +584,8 @@ class ChatBot(Client):
             if(".image" in msg):
                 if ("credit" not in msg):
                     imageSearch(self, msg)
-
+            elif(".gimage" in msg):
+                gimageSearch(msg)
             elif(".progsol" in msg):
                 programming_solution(self, msg)
             elif(".translate" in msg):

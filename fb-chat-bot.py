@@ -515,13 +515,13 @@ class ChatBot(Client):
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
-            elif ("languages" == destinion):
+            elif (destinion == "languages"):
                 reply = language
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
             else:
-                reply = "Wrong Translation Code used!\n chat .translate languages"
+                reply = "Wrong Translation Code used!\n chat .gtranslate languages"
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))

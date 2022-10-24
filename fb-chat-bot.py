@@ -505,15 +505,18 @@ class ChatBot(Client):
             try:
                 destination = int(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
-                ToBeTranslate = ToBeTranslate.replace(str(destination),"")
+                ToBeTranslate = ToBeTranslate.replace(str(destination),"").replace(str(srctext),"")
+                print(ToBeTranslate)
             except:
                 destination = str(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
+                ToBeTranslate = ToBeTranslate.replace(str(destination),"").replace(str(srctext),"")
+                print(ToBeTranslate)
 
             translator = googletrans.Translator()
             language = googletrans.LANGUAGES
             if (destination in language and srctext in language):
-                Translated = translator.translate(ToBeTranslate, dest=destination).text
+                Translated = translator.translate(ToBeTranslate, dest=destination, src=srctext).text
                 reply = Translated.replace(destination,"")
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,

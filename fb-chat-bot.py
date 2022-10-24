@@ -517,7 +517,7 @@ class ChatBot(Client):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
             elif (destinion == "languages"):
-                languages = ["Translation code => Language"]
+                languages = ["Translation Codes\nExample: .gtranslate Mahal kita en\n"]
                 for a in language:
                     languages.append(f"{a} => {language[a].capitalize()}")
                 reply = "\n".join(languages)

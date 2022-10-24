@@ -134,9 +134,9 @@ class ChatBot(Client):
 
         def fetchThreadsMsg():
             mikeystatus()
-            thread_idd = []
+            #thread_idd = []
             arrayn = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
-            thread_idd = arrayn[0]["GROUP"]
+            thread_idd = arrayn[0]
             return(thread_idd)
 
         def mikeystatus():

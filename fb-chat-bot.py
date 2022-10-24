@@ -760,6 +760,7 @@ class ChatBot(Client):
                 #reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
                 reply = fetchThreadsMsg()
                 #requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
+                print(reply)
                 sendMsg()
                 #print(reply)
                 #sys.stdout.flush()

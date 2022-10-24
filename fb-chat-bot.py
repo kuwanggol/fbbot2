@@ -33,7 +33,6 @@ masterid = ["100078868689291","100035093511992"]
 otherbotid = ["100086019336728","100078868689291"]
 
 class ChatBot(Client):
-    self.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=thread_type)
 
 
 
@@ -938,6 +937,8 @@ cookies = {
 client = ChatBot("",
                  "", session_cookies=cookies)
 print(client.isLoggedIn())
+
+fbchat.Client.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=ThreadType.GROUP)
 
 try:
     client.listen()

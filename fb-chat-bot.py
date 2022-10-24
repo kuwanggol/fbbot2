@@ -900,7 +900,10 @@ class ChatBot(Client):
             msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
         else:
-            pass
+            reply = "Mabuti nalang di ako."
+            self.changeNickname("Bot", user_id=author_id, thread_id=thread_id, thread_type=thread_type)
+            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=thread_type))
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):

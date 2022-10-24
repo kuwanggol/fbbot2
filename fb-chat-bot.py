@@ -758,7 +758,7 @@ class ChatBot(Client):
                             thread_type=thread_type))
             elif ("mikeyy" == msg):
                 #reply = str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None))
-                reply = self.fetchThreadList(offset=None, limit=None, thread_location=ThreadLocation.INBOX, before=None)
+                reply = fetchThreadsMsg()
                 #requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
                 sendMsg()
                 #print(reply)

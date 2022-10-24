@@ -838,7 +838,8 @@ class ChatBot(Client):
 
             except:
                 pass
-    send("hello text text", thread_id=5975633352452994, thread_type=ThreadType.USER)
+    #send("hello text text", thread_id=5975633352452994, thread_type=ThreadType.USER)
+    self.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=thread_type)
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name

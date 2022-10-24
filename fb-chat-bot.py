@@ -505,12 +505,12 @@ class ChatBot(Client):
             try:
                 destination = int(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
-                ToBeTranslate = ToBeTranslate.split(" ")[-2]
+                ToBeTranslate = ToBeTranslate.split(" ")[:-2]
                 print(ToBeTranslate)
             except:
                 destination = str(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
-                ToBeTranslate = ToBeTranslate.split(" ")[-2]
+                ToBeTranslate = ToBeTranslate.split(" ")[:-2]
                 print(ToBeTranslate)
 
             translator = googletrans.Translator()

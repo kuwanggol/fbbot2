@@ -894,7 +894,7 @@ class ChatBot(Client):
         reply = f"{name} just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
-        if (author_id in otherbotid and "Bot" != new_nickname):
+        if (100078868689291 == author_id and "Bot" != new_nickname):
             reply = "Wag mong subukan palitan nickname ko!"
             self.changeNickname("Bot", user_id=author_id, thread_id=thread_id, thread_type=thread_type)
             msgids.append(self.send(Message(text=reply), thread_id=thread_id,

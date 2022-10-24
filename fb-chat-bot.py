@@ -938,10 +938,11 @@ client = ChatBot("",
                  "", session_cookies=cookies)
 print(client.isLoggedIn())
 
-fbchat.Client.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=ThreadType.GROUP)
+
 
 try:
     client.listen()
+    fbchat.Client.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=ThreadType.GROUP)
 except:
     time.sleep(3)
     client.listen()

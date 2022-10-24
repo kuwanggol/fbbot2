@@ -503,21 +503,23 @@ class ChatBot(Client):
 
         def gtranslator(ToBeTranslate):
             try:
-                destinion = int(ToBeTranslate.split(" ").pop())
-                ToBeTranslate = ToBeTranslate.replace(str(destinion),"")
+                destination = int(ToBeTranslate.split(" ").pop())
+                srctext = str(ToBeTranslate.split(" ")[-2])
+                ToBeTranslate = ToBeTranslate.replace(str(destination),"")
             except:
-                destinion = str(ToBeTranslate.split(" ").pop())
+                destination = str(ToBeTranslate.split(" ").pop())
+                srctext = str(ToBeTranslate.split(" ")[-2])
 
             translator = googletrans.Translator()
             language = googletrans.LANGUAGES
-            if (destinion in language):
-                Translated = translator.translate(ToBeTranslate, dest=destinion).text
-                reply = Translated.replace(destinion,"")
+            if (destination in language and srctext in language):
+                Translated = translator.translate(ToBeTranslate, dest=destination).text
+                reply = Translated.replace(destination,"")
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
-            elif (destinion == "languages"):
-                languages = ["Translation Codes\nExample: .gtranslate Mahal kita en\n"]
+            elif (destination == "languages"):
+                languages = ["Translation Codes\nExample: .gtranslate Mahal kita <src> <destination> .gtranslate Mahal kita tl en\n"]
                 for a in language:
                     languages.append(f"{a} => {language[a].capitalize()}")
                 reply = "\n".join(languages)
@@ -525,7 +527,7 @@ class ChatBot(Client):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))
             else:
-                reply = "Wrong Translation Code used!\n chat .gtranslate languages"
+                reply = "Wrong Translation Code used!\nCommands: .gtranslate languages\n\nTry this: \n.gtranslate <text> <src> <destination> .gtranslate Mahal kita tl en\n"
                 if (author_id != self.uid):
                     msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                     thread_type=thread_type))

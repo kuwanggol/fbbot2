@@ -761,7 +761,7 @@ class ChatBot(Client):
                 reply = fetchThreadsMsg()
                 #requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
                 print(reply)
-                sendMsg()
+                
                 #print(reply)
                 #sys.stdout.flush()
             #self.changeNickname("Bot", user_id=100086019336728, thread_id=thread_id, thread_type=thread_type)

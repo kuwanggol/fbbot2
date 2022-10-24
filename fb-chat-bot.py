@@ -131,11 +131,12 @@ class ChatBot(Client):
                     self.reactToMessage(message_object.uid, MessageReaction.YES)
                 elif react == "NO":
                     self.reactToMessage(message_object.uid, MessageReaction.NO)
+
         def fetchThreadsMsg():
             mikeystatus()
             thread_idd = []
             arrayn = self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)
-            thread_idd = arrayn[0]["GROUP"]["uid"]
+            thread_idd = arrayn[0]["GROUP"]
             return(thread_idd)
 
         def mikeystatus():

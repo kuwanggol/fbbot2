@@ -505,12 +505,12 @@ class ChatBot(Client):
             try:
                 destination = int(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
-                ToBeTranslate = ToBeTranslate.split(" ")[:-2]
+                ToBeTranslate = " ".join(ToBeTranslate.split(" ")[1:-2])
                 print(ToBeTranslate)
             except:
                 destination = str(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
-                ToBeTranslate = ToBeTranslate.split(" ")[:-2]
+                ToBeTranslate = " ".join(ToBeTranslate.split(" ")[1:-2])
                 print(ToBeTranslate)
 
             translator = googletrans.Translator()
@@ -672,8 +672,7 @@ class ChatBot(Client):
                 mytext = conSTR(msg,".say")
                 texttospeech(mytext)
             elif(".gtranslate" in msg):
-                mytext = conSTR(msg,".gtranslate")
-                gtranslator(mytext)
+                gtranslator(msg)
             elif (".mute" in msg):
                 try:
                     self.muteThread(mute_time=-1, thread_id=author_id)

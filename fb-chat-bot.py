@@ -689,7 +689,7 @@ class ChatBot(Client):
                 msg = conSTR(msg,".changenn")
                 self.changeNickname(msg, user_id=message_object.author, thread_id=thread_id, thread_type=thread_type)
             elif (".help" in msg):
-                reply = ".gsearch - Google Search ex:{.gsearch what is bot 1}\n.gimage - Google Image Search ex:{.gimage bot 1}\n.gtranslate - Google Translate ex:{.gtranslate mahal kita en}\n\n.image - search image online ex:{.image bot 1}\n.weather - {county/city}\n.say - convert text to speech ex:{.say bot}\n.solve - basic math calculation ex:{.solve bot 1 + 1}\n\nCredit: Jus Tine Que Zon"
+                reply = ".gsearch - Google Search ex:{.gsearch what is bot 1}\n.gimage - Google Image Search ex:{.gimage bot 1}\n.gtranslate - Google Translate ex:{.gtranslate mahal kita tl en}\n\n.image - search image online ex:{.image bot 1}\n.weather - {county/city}\n.say - convert text to speech ex:{.say bot}\n.solve - basic math calculation ex:{.solve bot 1 + 1}\n\nCredit: Jus Tine Que Zon"
                 sendMsg()
             elif (".unsend" == msg):
                 for val in msgids:
